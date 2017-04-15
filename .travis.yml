@@ -1,6 +1,16 @@
 # Make sure to run the README.md usage example on commits.
+# Using wisdom from https://github.com/fchollet/keras/blob/master/.travis.yml
 dist: trusty
 language: python
 cache: pip
-install: pip install "https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-1.0.0rc0-cp27-none-linux_x86_64.whl"
+matrix:
+    include:
+        - python: 2.7
+          env: KERAS_BACKEND=tensorflow
+        - python: 3.5
+          env: KERAS_BACKEND=tensorflow
+        - python: 3.6
+          env: KERAS_BACKEND=tensorflow
+install:
+  - pip install tensorflow
 script: python -c 'exec(open("README.md").read().split("```")[1][6:])'
